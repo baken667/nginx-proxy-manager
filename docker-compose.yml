@@ -1,7 +1,7 @@
 services:
   nginx-proxy:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: 'nginx-proxy-manager'
+    image: "jc21/nginx-proxy-manager:latest"
+    container_name: "nginx-proxy-manager"
     restart: unless-stopped
     ports:
       - ${HTTP_PORT}:80
@@ -13,3 +13,9 @@ services:
       - ./nginx-snippets:/snippets:ro
     environment:
       TZ: ${TZ}
+    networks:
+      - gateway
+
+networks:
+  gateway:
+    external: true
