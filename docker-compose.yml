@@ -1,3 +1,9 @@
+secrets:
+  DB_ROOT_PWD:
+    file: .secrets/db_root_pwd.txt
+  MYSQL_PWD:
+    file: .secrets/mysql_pwd.txt
+    
 services:
   nginx-proxy:
     image: "jc21/nginx-proxy-manager:latest"
@@ -15,6 +21,20 @@ services:
       TZ: ${TZ}
     networks:
       - gateway
+  db:
+    image: jc21/mariadb-aria
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD__FILE: /run/secrets/DB_ROOT_PWD
+      MYSQL_DATABASE: "npm"
+      MYSQL_USER: "npm"
+      MYSQL_PASSWORD__FILE: /run/secrets/MYSQL_PWD
+      MARIADB_AUTO_UPGRADE: '1'
+    volumes:
+      - ./mysql:/var/lib/mysql
+    secrets:
+      - DB_ROOT_PWD
+      - MYSQL_PWD
 
 networks:
   gateway:

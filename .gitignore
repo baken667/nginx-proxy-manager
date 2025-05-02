@@ -1,1 +1,6 @@
 .env
+nginx-data/
+nginx-letsencrypt/
+nginx-snippets/
+mysql/
+.secrets/
