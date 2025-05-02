@@ -1,6 +1,5 @@
 .env
-nginx-data/
-nginx-letsencrypt/
-nginx-snippets/
-mysql/
+data/
+letsencrypt/
 .secrets/
+docker-compose.override.yml
